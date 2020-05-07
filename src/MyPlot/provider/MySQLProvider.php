@@ -11,18 +11,27 @@ class MySQLProvider extends DataProvider {
 	/** @var MyPlot $plugin */
 	protected $plugin;
 	/** @var DataConnectorImpl $db */
-	private $db;
+	protected $db;
 	/** @var array $settings */
-	private $settings;
-	/** @var string */
-	private $sqlGetPlot = "SELECT id, name, owner, helpers, denied, biome, pvp FROM plots WHERE level = ? AND X = ? AND Z = ?;",
-		$sqlSavePlot = "INSERT INTO plots (`id`, `level`, `X`, `Z`, `name`, `owner`, `helpers`, `denied`, `biome`, `pvp`) VALUES((SELECT id FROM plots p WHERE p.level = ? AND X = ? AND Z = ?),?,?,?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE name = VALUES(name), owner = VALUES(owner), helpers = VALUES(helpers), denied = VALUES(denied), biome = VALUES(biome), pvp = VALUES(pvp);",
-		$sqlSavePlotById = "UPDATE plots SET id = ?, level = ?, X = ?, Z = ?, name = ?, owner = ?, helpers = ?, denied = ?, biome = ?, pvp = ? WHERE id = VALUES(id);",
-		$sqlRemovePlot = "DELETE FROM plots WHERE id = ?;",
-		$sqlRemovePlotById = "DELETE FROM plots WHERE level = ? AND X = ? AND Z = ?;",
-		$sqlGetPlotsByOwner = "SELECT * FROM plots WHERE owner = ?;",
-		$sqlGetPlotsByOwnerAndLevel = "SELECT * FROM plots WHERE owner = ? AND level = ?;",
-		$sqlGetExistingXZ = "SELECT X, Z FROM plots WHERE (level = ? AND ((abs(X) = ? AND abs(Z) <= ?) OR (abs(Z) = ? AND abs(X) <= ?)));";
+	protected $settings;
+	/** @var string $sqlGetPlot */
+	protected $sqlGetPlot = "SELECT id, name, owner, helpers, denied, biome, pvp FROM plots WHERE level = ? AND X = ? AND Z = ?;";
+	/** @var string $sqlSavePlot */
+	protected $sqlSavePlot = "INSERT INTO plots (`id`, `level`, `X`, `Z`, `name`, `owner`, `helpers`, `denied`, `biome`, `pvp`) VALUES
+			((SELECT id FROM plots p WHERE p.level = ? AND X = ? AND Z = ?),?,?,?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE 
+			name = VALUES(name), owner = VALUES(owner), helpers = VALUES(helpers), denied = VALUES(denied), biome = VALUES(biome), pvp = VALUES(pvp);";
+	/** @var string $sqlSavePlotById */
+	protected $sqlSavePlotById = "UPDATE plots SET id = ?, level = ?, X = ?, Z = ?, name = ?, owner = ?, helpers = ?, denied = ?, biome = ?, pvp = ? WHERE id = VALUES(id);";
+	/** @var string $sqlRemovePlot */
+	protected $sqlRemovePlot = "DELETE FROM plots WHERE id = ?;";
+	/** @var string $sqlRemovePlotById */
+	protected $sqlRemovePlotById = "DELETE FROM plots WHERE level = ? AND X = ? AND Z = ?;";
+	/** @var string $sqlGetPlotsByOwner */
+	protected $sqlGetPlotsByOwner = "SELECT * FROM plots WHERE owner = ?;";
+	/** @var string $sqlGetPlotsByOwnerAndLevel */
+	protected $sqlGetPlotsByOwnerAndLevel = "SELECT * FROM plots WHERE owner = ? AND level = ?;";
+	/** @var string $sqlGetExistingXZ */
+	protected $sqlGetExistingXZ = "SELECT X, Z FROM plots WHERE (level = ? AND ((abs(X) = ? AND abs(Z) <= ?) OR (abs(Z) = ? AND abs(X) <= ?)));";
 
 	/**
 	 * MySQLProvider constructor.
