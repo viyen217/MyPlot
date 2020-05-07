@@ -5,12 +5,13 @@ namespace MyPlot\provider;
 use MyPlot\MyPlot;
 use MyPlot\Plot;
 use poggit\libasynql\base\DataConnectorImpl;
+use poggit\libasynql\DataConnector;
 use poggit\libasynql\libasynql;
 
 class MySQLProvider extends DataProvider {
 	/** @var MyPlot $plugin */
 	protected $plugin;
-	/** @var DataConnectorImpl $db */
+	/** @var DataConnector $db */
 	protected $db;
 	/** @var array $settings */
 	protected $settings;

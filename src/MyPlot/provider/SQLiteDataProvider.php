@@ -4,11 +4,12 @@ namespace MyPlot\provider;
 
 use MyPlot\MyPlot;
 use MyPlot\Plot;
+use poggit\libasynql\DataConnector;
 use poggit\libasynql\libasynql;
 
 class SQLiteDataProvider extends DataProvider
 {
-	/** @var string $db */
+	/** @var DataConnector $db */
 	private $db;
 	/** @var string $sqlGetPlot */
 	protected $sqlGetPlot = "SELECT id, name, owner, helpers, denied, biome, pvp FROM plots WHERE level = :level AND X = :X AND Z = :Z;";
