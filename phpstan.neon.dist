@@ -11,3 +11,5 @@ parameters:
         - /deps
     excludes_analyse:
         - /deps
+    ignoreErrors:
+        - 'Parameter #1 $name of method pocketmine\Server::getPlayer() expects string, pocketmine\OfflinePlayer|string given.'
